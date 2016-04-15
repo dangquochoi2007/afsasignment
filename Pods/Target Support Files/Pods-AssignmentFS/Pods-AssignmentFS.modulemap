@@ -1,6 +1,0 @@
-framework module Pods_AssignmentFS {
-  umbrella header "Pods-AssignmentFS-umbrella.h"
-
-  export *
-  module * { export * }
-}
