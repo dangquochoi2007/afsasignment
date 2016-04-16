@@ -10,17 +10,16 @@ import Foundation
 import RealmSwift
 import MapKit
 
-//class AFSBank: Object {
-//    dynamic var id = 0
-//    dynamic var name: String = ""
-//    dynamic var image: String = ""
-//    
-//    dynamic var atm: [AFSATM]?
-//    
-//    override static func primaryKey() -> String? {
-//        return "id"
-//    }
-//}
+class AFSBank: Object {
+    dynamic var id: String = ""
+    dynamic var name: String = ""
+    dynamic var image: String = ""
+
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+}
 
 class AFSATM: Object, MKAnnotation {
     dynamic var id: String = ""
