@@ -225,9 +225,9 @@
 			children = (
 				C59151A81CBDFFA300F2E0C6 /* String.swift */,
 				C59151A91CBDFFA300F2E0C6 /* UIViewShake.swift */,
-				C58AC5F61CBF558100CC219A /* UIColor.swift */,
 				C58AC5FA1CC07A4500CC219A /* NSUserDefault.swift */,
 				C58AC5FC1CC08B9C00CC219A /* NSDate.swift */,
+				C58AC5F61CBF558100CC219A /* UIColor.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";

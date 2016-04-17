@@ -26,11 +26,7 @@ class AFSBaseViewController: UIViewController, CLLocationManagerDelegate {
         // Do any additional setup after loading the view.
         if CLLocationManager.locationServicesEnabled() {
             
-            self.locationManager = CLLocationManager()
-            self.locationManager.delegate = self
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            self.locationManager.requestAlwaysAuthorization()
-            self.locationManager.startUpdatingLocation()
+            self.initLocationManagerIfNescessary()
         }
     }
 
@@ -43,6 +39,15 @@ class AFSBaseViewController: UIViewController, CLLocationManagerDelegate {
     //
 
     // CLLocationManagerDelegate
+    
+    func initLocationManagerIfNescessary() {
+        
+        self.locationManager = CLLocationManager()
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.startUpdatingLocation()
+    }
+    
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("didFailWithError")

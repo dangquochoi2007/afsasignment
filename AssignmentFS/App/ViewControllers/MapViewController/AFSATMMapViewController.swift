@@ -11,11 +11,17 @@ import MapKit
 import RealmMapView
 
 
-class AFSATMMapViewController: AFSBaseViewController {
+class AFSATMMapViewController: AFSBaseViewController, MKMapViewDelegate  {
     static let identifier = "AFSATMMapViewController"
     
-    @IBOutlet weak var atmLocationMapView: RealmMapView!
+    
+    @IBOutlet weak var atmLocationMapView: MKMapView!
+    
     var atmLocation: [AFSATM]?
+    
+    var showDirection: Bool = true
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

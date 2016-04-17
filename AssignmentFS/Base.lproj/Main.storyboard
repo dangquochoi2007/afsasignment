@@ -43,6 +43,9 @@
                             </barButtonItem>
                             <barButtonItem image="MapMarkerFilled-29" id="GfI-7B-9Ne">
                                 <color key="tintColor" red="0.54901960780000003" green="0.59215686270000001" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <segue destination="ILh-mU-wbw" kind="show" identifier="AFSATMMapViewController_Segue_Map" id="Qk0-T5-hYj"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -229,7 +232,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="RCk-pq-HLL" customClass="RealmMapView" customModule="RealmMapView">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="RCk-pq-HLL">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </mapView>
                         </subviews>
@@ -243,7 +246,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="atmLocationMapView" destination="RCk-pq-HLL" id="jX3-NJ-XaF"/>
+                        <outlet property="atmLocationMapView" destination="RCk-pq-HLL" id="w7x-qU-A8m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sgd-Se-uXS" userLabel="First Responder" sceneMemberID="firstResponder"/>

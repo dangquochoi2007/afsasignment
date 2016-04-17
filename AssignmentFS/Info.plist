@@ -47,6 +47,10 @@
 		<string>MKDirectionsModeTaxi</string>
 		<string>MKDirectionsModeTrain</string>
 	</array>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>AFS tracks your position to search nearby atm</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>ATM need to track your position to search nearby atm</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
