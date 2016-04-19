@@ -81,5 +81,9 @@ extension UIColor {
         return UIColor(hexString: "#949bde")!
     }
     
+    class func AFSGrayColor() -> UIColor {
+        return UIColor(hexString: "#d3d9e5")!
+    }
+    
    
 }

@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:HoChiMinhCity.gpx">
+   </FileRef>
+   <FileRef
       location = "group:AssignmentFS.xcodeproj">
    </FileRef>
    <FileRef

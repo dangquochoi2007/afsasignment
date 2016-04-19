@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import RealmSwift
+import MapKit
 
 class AFSATMViewController: AFSBaseViewController, UITextFieldDelegate, UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, AFSATMEmptyBackgroundDelegate, AFSPositionTableViewCellDelegate {
     
@@ -34,12 +34,41 @@ class AFSATMViewController: AFSBaseViewController, UITextFieldDelegate, UIGestur
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var avaiableTextField: UITextField!
     
+    
+    @IBOutlet weak var saveButton: UIButton!
+    
     var groupTextField = [UITextField]()
     
-    var atm: AFSATM?
+    var atm: AFSATM? {
+        didSet {
+            if self.atm == nil {
+                // change image add
+                self.saveButton.setBackgroundImage(UIImage(named: "Add List-96"), forState: UIControlState.Normal)
+            } else {
+                // change image edit
+                self.saveButton.setBackgroundImage(UIImage(named: "EditProperty-90"), forState: .Normal)
+                
+            }
+            
+        }
+    }
     var atmListLocal = [AFSATM]() {
         didSet {
             self.atmLocationTableView.reloadData()
+        }
+    }
+    
+    var currentUserLocation: CLLocationCoordinate2D? {
+        didSet {
+            guard self.currentUserLocation != nil &&
+            userDefaulsValue.hasKey(atmObjectKeyValue.Latitude.rawValue) == false &&
+            userDefaulsValue.hasKey(atmObjectKeyValue.Longtitude.rawValue) == false
+            else {
+                return
+            }
+            
+            userDefaulsValue[atmObjectKeyValue.Latitude.rawValue] = self.currentUserLocation?.latitude
+            userDefaulsValue[atmObjectKeyValue.Longtitude.rawValue] = self.currentUserLocation?.longitude
         }
     }
     
@@ -59,10 +88,10 @@ class AFSATMViewController: AFSBaseViewController, UITextFieldDelegate, UIGestur
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Do any additional setup after loading the view.
         self.initAppearance()
         self.setupKeyboardNotifcationListenerForScrollView()
         self.makeRefresh()
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -281,7 +310,7 @@ class AFSATMViewController: AFSBaseViewController, UITextFieldDelegate, UIGestur
             
             let value = [
                 "bank": nameBank,
-                "latidude": latitude,
+                "latitude": latitude,
                 "longtitude" : longtitude,
                 "city": city,
                 "address": address,
@@ -346,8 +375,8 @@ class AFSATMViewController: AFSBaseViewController, UITextFieldDelegate, UIGestur
         self.atm = atm
     
         self.nameBankTextField.text = self.atm?.bank
-        self.latitudeTextField.text = String(format: "%.1f",self.atm!.latitude)
-        self.longtitudeTextField.text = String(format: "%.1f",self.atm!.longitude)
+        self.latitudeTextField.text = String(self.atm!.latitude)
+        self.longtitudeTextField.text = String(self.atm!.longtitude)
         self.cityTextField.text = self.atm?.city
         self.addressTextField.text = self.atm?.address
         self.avaiableTextField.text = self.atm?.service

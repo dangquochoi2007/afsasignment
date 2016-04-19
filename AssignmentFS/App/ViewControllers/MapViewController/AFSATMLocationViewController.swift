@@ -9,10 +9,24 @@
 import UIKit
 import CoreLocation
 import MapKit
+import LKAlertController
 
-class AFSATMLocationViewController: AFSBaseViewController, UITableViewDelegate, UITableViewDataSource, AFSATMEmptyBackgroundDelegate {
+
+class AFSATMLocationViewController: AFSBaseViewController, UITableViewDelegate, UITableViewDataSource, AFSATMEmptyBackgroundDelegate, CLLocationManagerDelegate {
+    
     
     @IBOutlet weak var atmLocationTableView: UITableView!
+    
+    var locationManager: CLLocationManager!
+    var regionRadius:Double = 1000
+    var currentUserLocation: CLLocation? {
+        didSet {
+            if currentUserLocation != nil {
+                self.atmLocationTableView.reloadData()
+            }
+        }
+    }
+    
     
     lazy var emptyBackgroundView: UIView? = {
         let emptybackground = AFSATMEmptyBackgroundView.loadNib()
@@ -26,6 +40,7 @@ class AFSATMLocationViewController: AFSBaseViewController, UITableViewDelegate, 
         }
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +48,9 @@ class AFSATMLocationViewController: AFSBaseViewController, UITableViewDelegate, 
         self.initAppearance()
         self.makeRefresh()
         self.animationTable()
+        
+        //Init appearance location
+        self.initAppearanceLocationManager()
         
     }
     
@@ -59,6 +77,13 @@ class AFSATMLocationViewController: AFSBaseViewController, UITableViewDelegate, 
      // Pass the selected object to the new view controller.
         if segue.identifier == "AFSATMMapViewController_Segue_Map" {
             print("AFSATMMapViewController_Segue_Map")
+            let destinationViewController = segue.destinationViewController as! AFSATMMapViewController
+            destinationViewController.showDirection = false
+            destinationViewController.showLocalLocation = true
+            destinationViewController.atmLocation = self.atmListLocal
+        } else if segue.identifier == "AFSATMViewController_Segue" {
+            let destionationViewController = segue.destinationViewController as! AFSATMViewController
+            destionationViewController.currentUserLocation = self.currentUserLocation?.coordinate
         }
      }
  
@@ -83,7 +108,10 @@ class AFSATMLocationViewController: AFSBaseViewController, UITableViewDelegate, 
                 self.atmListLocal = atmListLocalData
             }
         } catch {
-            
+            Alert(title: "ATM location is empty",
+                message: "Please add more ATM position")
+                .addAction("Close")
+                .show()
             
         }
     }
@@ -117,6 +145,11 @@ class AFSATMLocationViewController: AFSBaseViewController, UITableViewDelegate, 
         let cell = tableView.dequeueReusableCellWithIdentifier(AFSATMTableViewCell.identifier, forIndexPath: indexPath) as! AFSATMTableViewCell
         cell.atm = self.atmListLocal[indexPath.row]
         cell.initAppearance()
+        if let userLocation = currentUserLocation {
+            let atmCllocation = CLLocation(latitude: cell.atm!.latitude, longitude: cell.atm!.longtitude)
+            let travelDistance = userLocation.distanceFromLocation(atmCllocation)
+            cell.distanceLabel.text = travelDistance.distance()
+        }
         return cell
     }
     
@@ -125,6 +158,8 @@ class AFSATMLocationViewController: AFSBaseViewController, UITableViewDelegate, 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mapDirection = storyboard.instantiateViewControllerWithIdentifier(AFSATMMapViewController.identifier) as! AFSATMMapViewController
         mapDirection.atmLocation = [self.atmListLocal[indexPath.row]]
+        mapDirection.showDirection =  true
+        mapDirection.showLocalLocation = true
         self.navigationController?.pushViewController(mapDirection, animated: true)
     }
     
@@ -162,6 +197,78 @@ class AFSATMLocationViewController: AFSBaseViewController, UITableViewDelegate, 
         
     }
     
+    // CL location delegate
+    func createLocationManager(startImediately startImediately: Bool) {
+        if self.locationManager == nil {
+            self.locationManager = CLLocationManager()
+            self.locationManager.delegate = self
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            self.locationManager.requestAlwaysAuthorization()
+            self.locationManager.distanceFilter = 50
+            self.locationManager.startUpdatingLocation()
+        }
+    }
     
+    
+    func initAppearanceLocationManager() {
+        if CLLocationManager.locationServicesEnabled() {
+            
+            self.createLocationManager(startImediately: true)
+        } else {
+            Alert(title: "Title", message: "Message")
+                .addAction("Close")
+                .addAction("Open Setting", style: .Default, handler: { _ in
+                    if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
+                        UIApplication.sharedApplication().openURL(url)
+                    }
+                }).show()
+        }
+    }
+    
+    
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("update didUpdateLocations")
+
+        if locations.count > 0 {
+            self.currentUserLocation = locations.last
+            debugPrint(self.currentUserLocation)
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        switch CLLocationManager.authorizationStatus() {
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
+            self.locationManager.startUpdatingLocation()
+            break
+        case .NotDetermined:
+            self.locationManager.requestAlwaysAuthorization()
+        default:
+            Alert(title: "Location Access Disabled",
+                message: "In order to be notified about ATM near you, please open this app's settings and set location access to 'Always'.")
+                .addAction("Open Settings", style: .Default, handler: { _ in
+                    //open setting application url
+                    if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
+                        UIApplication.sharedApplication().openURL(url)
+                    }
+                }).show()
+            return
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        
+        Alert(title: "Error find your location", message: "Location manager failed with error = \(error.localizedDescription). Please make sure enable location in setting")
+            .addAction("Close")
+            .show()
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+        
+        print("Latitude = \(newLocation.coordinate.latitude)")
+        print("Longitude = \(newLocation.coordinate.longitude)")
+    }
+    
+
 
 }

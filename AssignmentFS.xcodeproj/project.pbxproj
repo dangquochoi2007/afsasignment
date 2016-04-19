@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C57406141CC4843900F48933 /* GOMapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57406131CC4843800F48933 /* GOMapService.swift */; };
+		C57406161CC4EB7300F48933 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57406151CC4EB7300F48933 /* Double.swift */; };
 		C58AC5F41CBE8A2200CC219A /* AFSATMEmptyBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58AC5F21CBE8A2200CC219A /* AFSATMEmptyBackgroundView.swift */; };
 		C58AC5F51CBE8A2200CC219A /* AFSATMEmptyBackgroundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C58AC5F31CBE8A2200CC219A /* AFSATMEmptyBackgroundView.xib */; };
 		C58AC5F71CBF558100CC219A /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58AC5F61CBF558100CC219A /* UIColor.swift */; };
@@ -57,6 +59,8 @@
 /* Begin PBXFileReference section */
 		4AD421CA37AA335D76483D8F /* Pods-AssignmentFS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssignmentFS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AssignmentFS/Pods-AssignmentFS.debug.xcconfig"; sourceTree = "<group>"; };
 		96BAE696ABF789B86E626F92 /* Pods_AssignmentFS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AssignmentFS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C57406131CC4843800F48933 /* GOMapService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GOMapService.swift; sourceTree = "<group>"; };
+		C57406151CC4EB7300F48933 /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		C58AC5F21CBE8A2200CC219A /* AFSATMEmptyBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AFSATMEmptyBackgroundView.swift; sourceTree = "<group>"; };
 		C58AC5F31CBE8A2200CC219A /* AFSATMEmptyBackgroundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AFSATMEmptyBackgroundView.xib; sourceTree = "<group>"; };
 		C58AC5F61CBF558100CC219A /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -127,6 +131,14 @@
 				E0E67DE8280956E2D6869AAA /* Pods-AssignmentFS.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		C57406121CC4841D00F48933 /* APIService */ = {
+			isa = PBXGroup;
+			children = (
+				C57406131CC4843800F48933 /* GOMapService.swift */,
+			);
+			path = APIService;
 			sourceTree = "<group>";
 		};
 		C58AC5F11CBE8A2200CC219A /* ATMEmptyBackgroundView */ = {
@@ -214,6 +226,7 @@
 		C59151A61CBDFFA300F2E0C6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C57406121CC4841D00F48933 /* APIService */,
 				C59151A71CBDFFA300F2E0C6 /* Extension */,
 				C59151AA1CBDFFA300F2E0C6 /* Validate */,
 			);
@@ -228,6 +241,7 @@
 				C58AC5FA1CC07A4500CC219A /* NSUserDefault.swift */,
 				C58AC5FC1CC08B9C00CC219A /* NSDate.swift */,
 				C58AC5F61CBF558100CC219A /* UIColor.swift */,
+				C57406151CC4EB7300F48933 /* Double.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -537,6 +551,8 @@
 				C58AC6041CC0AD1D00CC219A /* AFSATMMapViewController.swift in Sources */,
 				C59151C41CBDFFA300F2E0C6 /* AFSDirectTableViewCell.swift in Sources */,
 				C58AC5FD1CC08B9C00CC219A /* NSDate.swift in Sources */,
+				C57406141CC4843900F48933 /* GOMapService.swift in Sources */,
+				C57406161CC4EB7300F48933 /* Double.swift in Sources */,
 				C58AC5F41CBE8A2200CC219A /* AFSATMEmptyBackgroundView.swift in Sources */,
 				C59151BF1CBDFFA300F2E0C6 /* Validator.swift in Sources */,
 				C59151C01CBDFFA300F2E0C6 /* AFSATMs.swift in Sources */,

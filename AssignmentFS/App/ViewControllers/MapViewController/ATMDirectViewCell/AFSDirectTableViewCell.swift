@@ -9,7 +9,13 @@
 import UIKit
 
 class AFSDirectTableViewCell: UITableViewCell {
+    static let identifier = "AFSDirectTableViewCell"
 
+    @IBOutlet weak var directionImageView: UIImageView!
+    @IBOutlet weak var stepGuideLabel: UILabel!
+    @IBOutlet weak var distanceStepLabel: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,5 +26,4 @@ class AFSDirectTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
 }

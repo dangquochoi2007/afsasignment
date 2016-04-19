@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
@@ -214,6 +215,7 @@
                         <outlet property="latitudeTextField" destination="hOA-tB-EgE" id="Gmi-1S-vLy"/>
                         <outlet property="longtitudeTextField" destination="Ez3-Sg-SAg" id="es6-lr-VaJ"/>
                         <outlet property="nameBankTextField" destination="U3j-y2-jrN" id="FCt-th-yHT"/>
+                        <outlet property="saveButton" destination="RK0-sD-xaj" id="WQc-G1-H9u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0lX-OM-5n2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -223,7 +225,7 @@
         <!--Map View Controller-->
         <scene sceneID="XJA-AK-qtG">
             <objects>
-                <viewController storyboardIdentifier="AFSATMMapViewController" id="ILh-mU-wbw" customClass="AFSATMMapViewController" customModule="AssignmentFS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AFSATMMapViewController" modalPresentationStyle="overCurrentContext" id="ILh-mU-wbw" customClass="AFSATMMapViewController" customModule="AssignmentFS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gJ6-4M-Ny3"/>
                         <viewControllerLayoutGuide type="bottom" id="XA7-jI-Iad"/>
@@ -235,18 +237,42 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="RCk-pq-HLL">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </mapView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mdt-Ze-ad6">
+                                <rect key="frame" x="0.0" y="378.5" width="320" height="189.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21,000 Km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h4M-YB-L1h">
+                                <rect key="frame" x="20" y="357.5" width="280" height="21"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="wuq-tK-luM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="RCk-pq-HLL" firstAttribute="top" secondItem="jZJ-ey-2sA" secondAttribute="top" id="6n9-Dn-gAK"/>
+                            <constraint firstItem="mdt-Ze-ad6" firstAttribute="top" secondItem="h4M-YB-L1h" secondAttribute="bottom" id="Ddu-Ab-b2U"/>
                             <constraint firstItem="XA7-jI-Iad" firstAttribute="top" secondItem="RCk-pq-HLL" secondAttribute="bottom" id="OpM-6F-yMw"/>
                             <constraint firstAttribute="trailing" secondItem="RCk-pq-HLL" secondAttribute="trailing" id="PYc-iq-9sg"/>
+                            <constraint firstItem="h4M-YB-L1h" firstAttribute="leading" secondItem="jZJ-ey-2sA" secondAttribute="leading" constant="20" id="Twd-6m-MRV"/>
                             <constraint firstItem="RCk-pq-HLL" firstAttribute="leading" secondItem="jZJ-ey-2sA" secondAttribute="leading" id="Y2f-tT-q4E"/>
+                            <constraint firstAttribute="trailing" secondItem="mdt-Ze-ad6" secondAttribute="trailing" id="aus-lS-QVL"/>
+                            <constraint firstAttribute="trailing" secondItem="h4M-YB-L1h" secondAttribute="trailing" constant="20" id="bOj-a1-3T3"/>
+                            <constraint firstItem="XA7-jI-Iad" firstAttribute="top" secondItem="mdt-Ze-ad6" secondAttribute="bottom" id="k4b-CM-pf3"/>
+                            <constraint firstItem="mdt-Ze-ad6" firstAttribute="leading" secondItem="jZJ-ey-2sA" secondAttribute="leading" id="nZ5-Qr-aCr"/>
+                            <constraint firstItem="h4M-YB-L1h" firstAttribute="centerX" secondItem="jZJ-ey-2sA" secondAttribute="centerX" id="og9-6z-T1e"/>
+                            <constraint firstItem="mdt-Ze-ad6" firstAttribute="height" secondItem="jZJ-ey-2sA" secondAttribute="height" multiplier="1:3" id="sob-wi-mG4"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="atmLocationMapView" destination="RCk-pq-HLL" id="w7x-qU-A8m"/>
+                        <outlet property="directionTableView" destination="mdt-Ze-ad6" id="4dY-8T-fKi"/>
+                        <outlet property="distanceLabel" destination="h4M-YB-L1h" id="eeI-JF-8Ke"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sgd-Se-uXS" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -20,8 +20,8 @@ class AFSATMTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.AFSCherryColor().CGColor
+        self.backgroundColor = UIColor.AFSGrayColor()
         self.layer.masksToBounds = true
         // Initialization code
     }
@@ -40,7 +40,6 @@ class AFSATMTableViewCell: UITableViewCell {
         self.addressLabel.text = activeATM.address
         self.serviceLabel.text = activeATM.service
         self.nameBankLabel.text = activeATM.bank
-        self.distanceLabel.text = activeATM.distanceFromLocation()
         
         
     }

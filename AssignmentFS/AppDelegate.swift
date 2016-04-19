@@ -19,6 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let textAttributes = [NSForegroundColorAttributeName:UIColor.AFSNavigationColor()]
         UINavigationBar.appearance().titleTextAttributes = textAttributes
+        
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Badge, .Alert], categories: nil))
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        
         return true
     }
 

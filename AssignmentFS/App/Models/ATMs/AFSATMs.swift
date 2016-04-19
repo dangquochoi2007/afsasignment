@@ -32,7 +32,7 @@ class AFSATM: Object, MKAnnotation {
     
     
     dynamic var latitude: Double = 0
-    dynamic var longitude: Double = 0
+    dynamic var longtitude: Double = 0
     
     dynamic var created_at: NSDate?
     dynamic var updated_at: NSDate?
@@ -45,17 +45,26 @@ class AFSATM: Object, MKAnnotation {
    
     
     var coordinate: CLLocationCoordinate2D {
-        return CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)
+        return CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longtitude)
+    }
+    
+    var geocoord: CLLocation {
+        return CLLocation(latitude: self.latitude, longitude: self.longtitude)
     }
 
     func distanceFromLocation() -> String {
-        return "100 km"
+        return ""
     }
     
     // Realm object
-    class func find(predict: String? = nil) throws -> [AFSATM]? {
+    class func find(predict: String = "") throws -> [AFSATM]? {
         let realm = try! Realm()
-        let objectList = realm.objects(AFSATM.self).sorted("updated_at", ascending: false)
+        var objectList = realm.objects(AFSATM.self)
+        
+        if predict != "" {
+            objectList = objectList.filter(predict)
+        }
+        objectList = objectList.sorted("updated_at", ascending: false)
         var result: [AFSATM] = []
         for object in objectList {
             result.append(object)
@@ -82,7 +91,7 @@ class AFSATM: Object, MKAnnotation {
             self.quality = quality
             self.service = service
             self.latitude = latitude
-            self.longitude = longitude
+            self.longtitude = longitude
             
             self.updated_at = NSDate()
         }

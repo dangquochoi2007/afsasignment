@@ -6,7 +6,7 @@
 target 'AssignmentFS' do
 pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
 pod 'RealmSwift'
-pod 'RealmMapView'
+pod 'LKAlertController'
 end
 
 target 'AssignmentFSTests' do
